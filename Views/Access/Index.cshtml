@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<hr />
+<form id="frm">
+        <div class="row">
+            <div class=" col-lg-9 col-lg-offset-5">
+                <label class="text-primary">Usuario</label><br>
+                <input type="text" name="user" /><br>
+                <label class="text-primary" >Contraseña</label><br>
+                <input type="password" name="password" /><br>
+                <input type="submit" class="btn btn-success" value="Entrar" />
+            </div>
+    
+    </div>
+</form>
+@section scripts
+{
+    <script>
+    $(document).ready(function (){
+        $("#frm").submit(function (e) {
+            e.preventDefault();
+
+            url = "@Url.Content("~/Access/Enter")"
+            parametros = $(this).serialize();
+
+            $.post(url, parametros, function (data){
+
+                if (data == "1") {
+                    document.location.href = "@Url.Content("~/")";
+                } else {
+                    alert(data)
+                }
+            })
+
+        })
+    })
+
+    </script>
+}
